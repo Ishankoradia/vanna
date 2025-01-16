@@ -28,8 +28,11 @@ class PG_VectorStore(VannaBase):
         if config and "embedding_function" in config:
             self.embedding_function = config.get("embedding_function")
         else:
-            from langchain_huggingface import HuggingFaceEmbeddings
-            self.embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+            # from langchain_huggingface import HuggingFaceEmbeddings
+            # self.embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+            from langchain_openai import OpenAIEmbeddings
+
+            self.embedding_function = OpenAIEmbeddings()
 
         self.sql_collection = PGVector(
             embeddings=self.embedding_function,
